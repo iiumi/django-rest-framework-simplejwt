@@ -47,6 +47,22 @@ class TokenUser:
     @cached_property
     def is_superuser(self):
         return self.token.get('is_superuser', False)
+    
+    @cached_property
+    def user_seller(self):
+        return self.token[api_settings.USER_USER_SELLER_CLAIM]
+
+    @cached_property
+    def user_author(self):
+        return self.token[api_settings.USER_USER_AUTHOR_CLAIM]
+
+    @cached_property
+    def is_active(self):
+        return self.token[api_settings.USER_IS_ACTIVE_CLAIM]
+
+    @cached_property
+    def is_staff(self):
+        return self.token[api_settings.USER_IS_STAFF_CLAIM]
 
     def __eq__(self, other):
         return self.id == other.id
