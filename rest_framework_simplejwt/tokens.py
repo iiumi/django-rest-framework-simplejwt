@@ -159,11 +159,21 @@ class Token:
         after authenticating the user's credentials.
         """
         user_id = getattr(user, api_settings.USER_ID_FIELD)
+        is_superuser = getattr(user, api_settings.USER_IS_SUPERUSER_FIELD)
+        user_seller = getattr(user, api_settings.USER_USER_SELLER_FIELD)
+        user_author = getattr(user, api_settings.USER_USER_AUTHOR_FIELD)
+        is_active = getattr(user, api_settings.USER_IS_ACTIVE_FIELD)
+        is_staff = getattr(user, api_settings.USER_IS_STAFF_FIELD)
         if not isinstance(user_id, int):
             user_id = str(user_id)
 
         token = cls()
         token[api_settings.USER_ID_CLAIM] = user_id
+        token[api_settings.USER_IS_SUPERUSER_CLAIM] = is_superuser
+        token[api_settings.USER_USER_SELLER_CLAIM] = user_seller
+        token[api_settings.USER_USER_AUTHOR_CLAIM] = user_author
+        token[api_settings.USER_IS_ACTIVE_CLAIM] = is_active
+        token[api_settings.USER_IS_STAFF_CLAIM] = is_staff
 
         return token
 
